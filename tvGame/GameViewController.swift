@@ -4,9 +4,9 @@ class GameViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-		view = SKView()
-
-        let scene = GameScene()
+		
+		view = SKView(frame: view.bounds)
+		let scene = GameScene(size: view.bounds.size)
 		
 		// Set the scale mode to scale to fit the window
 		scene.scaleMode = .aspectFill
@@ -19,6 +19,7 @@ class GameViewController: UIViewController {
 			
 			view.showsFPS = true
 			view.showsNodeCount = true
+			view.showsPhysics = true
 			view.preferredFramesPerSecond = 60
 		}
 	}
