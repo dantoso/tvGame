@@ -26,6 +26,15 @@ extension GameViewController: MCSessionDelegate {
 		print("I GOT IIITTT")
 	}
 	
+	func startHosting() {
+		advertiser = MCAdvertiserAssistant(serviceType: "mdv-hm", discoveryInfo: nil, session: mcSession)
+		advertiser.start()
+	}
+	
+	func sendData() {
+		
+	}
+	
 	func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
 		
 	}
@@ -36,11 +45,6 @@ extension GameViewController: MCSessionDelegate {
 	
 	func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
 		
-	}
-	
-	func startHosting() {
-		advertiser = MCAdvertiserAssistant(serviceType: "hockey-de-mesa-maneiro", discoveryInfo: nil, session: mcSession)
-		advertiser.start()
 	}
 	
 }

@@ -12,23 +12,6 @@ extension CGVector {
 final class Joystick: SKNode {
 	
 	var vector = CGVector.zero
-//	{
-//		didSet {
-//			if vector.dx > maxLimit {
-//				vector.dx = maxLimit
-//			}
-//			else if vector.dx < -maxLimit {
-//				vector.dx = -maxLimit
-//			}
-//			if vector.dy > maxLimit {
-//				vector.dy = maxLimit
-//			}
-//			else if vector.dy < -maxLimit {
-//				vector.dy = -maxLimit
-//			}
-//		}
-//	}
-	
 	var isTouched = false
 	
 	var player: SKShapeNode?
