@@ -4,5 +4,9 @@
 <dict>
 	<key>Privacy - Local Network Usage Description </key>
 	<string>pra poder jogar com os amigo</string>
+	<key>_mdv-hm._tcp</key>
+	<string></string>
+	<key>_mdv-hm._udp</key>
+	<string></string>
 </dict>
 </plist>

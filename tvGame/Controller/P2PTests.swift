@@ -40,6 +40,7 @@ extension GameViewController: MCSessionDelegate {
 	func startHosting() {
 		advertiser = MCAdvertiserAssistant(serviceType: "mdv-hm", discoveryInfo: nil, session: mcSession)
 		advertiser.start()
+		print("hosting started")
 	}
 	
 	func sendData() {
