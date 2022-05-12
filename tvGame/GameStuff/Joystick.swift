@@ -15,7 +15,7 @@ final class Joystick: SKNode {
 	var isTouched = false
 	
 	var player: SKShapeNode?
-	let maxLimit: CGFloat = 500
+	let maxLimit: CGFloat = 250
 	let minLimit: CGFloat = 5
 
 	///Define o tamanho da área em que o joystick percebe toques
@@ -76,7 +76,7 @@ final class Joystick: SKNode {
 		guard CACurrentMediaTime() - touchTime > 0.05 else {return}
 		
 		touchLocation = touch.location(in: self)
-		vector = CGVector(dx: xDistance*0.6, dy: yDistance*0.6)
+		vector = CGVector(dx: xDistance, dy: yDistance)
 		center = touchLocation
 		movePlayer()
 		self.touchTime = CACurrentMediaTime()
@@ -91,7 +91,7 @@ final class Joystick: SKNode {
 			reset()
 			return
 		}
-		vector = CGVector(dx: xDistance*0.6, dy: yDistance*0.6)
+		vector = CGVector(dx: xDistance, dy: yDistance)
 		movePlayer()
 		reset()
 	}
@@ -105,7 +105,7 @@ final class Joystick: SKNode {
 			reset()
 			return
 		}
-		vector = CGVector(dx: xDistance*0.6, dy: yDistance*0.6)
+		vector = CGVector(dx: xDistance, dy: yDistance)
 		movePlayer()
 		reset()
 	}
