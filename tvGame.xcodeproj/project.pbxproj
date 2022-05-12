@@ -63,14 +63,30 @@
 				FB9EC5F2282D3B1B008FF216 /* Info.plist */,
 				FB9F39EF282C29400064F202 /* Constants.swift */,
 				FB9E7175282AF635008FBFD0 /* AppDelegate.swift */,
-				FB9E717B282AF635008FBFD0 /* GameScene.swift */,
-				FB9F39F1282C3C0F0064F202 /* Joystick.swift */,
-				FB9EC5F0282D32FB008FF216 /* P2PTests.swift */,
-				FB9E717D282AF635008FBFD0 /* GameViewController.swift */,
+				FBF82B95282D8A8300F7FA05 /* GameStuff */,
+				FBF82B96282D8A9800F7FA05 /* Controller */,
 				FB9E7182282AF637008FBFD0 /* Assets.xcassets */,
 				FB9E7184282AF637008FBFD0 /* LaunchScreen.storyboard */,
 			);
 			path = tvGame;
+			sourceTree = "<group>";
+		};
+		FBF82B95282D8A8300F7FA05 /* GameStuff */ = {
+			isa = PBXGroup;
+			children = (
+				FB9E717B282AF635008FBFD0 /* GameScene.swift */,
+				FB9F39F1282C3C0F0064F202 /* Joystick.swift */,
+			);
+			path = GameStuff;
+			sourceTree = "<group>";
+		};
+		FBF82B96282D8A9800F7FA05 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				FB9E717D282AF635008FBFD0 /* GameViewController.swift */,
+				FB9EC5F0282D32FB008FF216 /* P2PTests.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
