@@ -28,8 +28,6 @@ extension GameViewController: MCSessionDelegate {
 			print("failed to convert data to string")
 			return
 		}
-		
-		print("I GOT IIITTT")
 		let vector = NSCoder.cgVector(for: string)
 		
 		DispatchQueue.main.async { [weak self] in
