@@ -1,6 +1,5 @@
 import SpriteKit
 
-
 class GameScene: SKScene {
 	
 	let screen = UIScreen.main.bounds

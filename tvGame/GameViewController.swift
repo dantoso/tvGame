@@ -7,6 +7,8 @@ class GameViewController: UIViewController {
 	var mcSession: MCSession!
 	var advertiser: MCAdvertiserAssistant!
 	
+	lazy var scene = GameScene(size: view.bounds.size)
+	
     override func viewDidLoad() {
         super.viewDidLoad()
 		
@@ -15,14 +17,12 @@ class GameViewController: UIViewController {
 		mcSession.delegate = self
 		
 		view = SKView(frame: view.bounds)
-		let scene = GameScene(size: view.bounds.size)
 		
 		// Set the scale mode to scale to fit the window
 		scene.scaleMode = .aspectFill
 		
 		// Present the scene
 		if let view = self.view as! SKView? {
-			view.presentScene(scene)
 			
 			view.ignoresSiblingOrder = true
 			
@@ -30,6 +30,8 @@ class GameViewController: UIViewController {
 			view.showsNodeCount = true
 			view.showsPhysics = true
 			view.preferredFramesPerSecond = 60
+			
+			view.presentScene(scene)
 		}
 		
 		startHosting()

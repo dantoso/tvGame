@@ -23,7 +23,18 @@ extension GameViewController: MCSessionDelegate {
 	}
 	
 	func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
+		
+		guard let string = String(data: data, encoding: .utf8) else {
+			print("failed to convert data to string")
+			return
+		}
+		
 		print("I GOT IIITTT")
+		let vector = NSCoder.cgVector(for: string)
+		
+		DispatchQueue.main.async { [weak self] in
+			self?.scene.player?.physicsBody?.applyImpulse(vector)
+		}
 	}
 	
 	func startHosting() {
