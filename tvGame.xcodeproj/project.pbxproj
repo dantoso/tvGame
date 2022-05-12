@@ -12,6 +12,7 @@
 		FB9E717E282AF635008FBFD0 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9E717D282AF635008FBFD0 /* GameViewController.swift */; };
 		FB9E7183282AF637008FBFD0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB9E7182282AF637008FBFD0 /* Assets.xcassets */; };
 		FB9E7186282AF637008FBFD0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB9E7184282AF637008FBFD0 /* LaunchScreen.storyboard */; };
+		FB9EC5F1282D32FB008FF216 /* P2PTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9EC5F0282D32FB008FF216 /* P2PTests.swift */; };
 		FB9F39F0282C29400064F202 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9F39EF282C29400064F202 /* Constants.swift */; };
 		FB9F39F2282C3C0F0064F202 /* Joystick.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9F39F1282C3C0F0064F202 /* Joystick.swift */; };
 /* End PBXBuildFile section */
@@ -23,6 +24,8 @@
 		FB9E717D282AF635008FBFD0 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		FB9E7182282AF637008FBFD0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FB9E7185282AF637008FBFD0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		FB9EC5F0282D32FB008FF216 /* P2PTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = P2PTests.swift; sourceTree = "<group>"; };
+		FB9EC5F2282D3B1B008FF216 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		FB9F39EF282C29400064F202 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		FB9F39F1282C3C0F0064F202 /* Joystick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Joystick.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -57,10 +60,12 @@
 		FB9E7174282AF635008FBFD0 /* tvGame */ = {
 			isa = PBXGroup;
 			children = (
+				FB9EC5F2282D3B1B008FF216 /* Info.plist */,
 				FB9F39EF282C29400064F202 /* Constants.swift */,
 				FB9E7175282AF635008FBFD0 /* AppDelegate.swift */,
 				FB9E717B282AF635008FBFD0 /* GameScene.swift */,
 				FB9F39F1282C3C0F0064F202 /* Joystick.swift */,
+				FB9EC5F0282D32FB008FF216 /* P2PTests.swift */,
 				FB9E717D282AF635008FBFD0 /* GameViewController.swift */,
 				FB9E7182282AF637008FBFD0 /* Assets.xcassets */,
 				FB9E7184282AF637008FBFD0 /* LaunchScreen.storyboard */,
@@ -140,6 +145,7 @@
 			files = (
 				FB9F39F2282C3C0F0064F202 /* Joystick.swift in Sources */,
 				FB9E717C282AF635008FBFD0 /* GameScene.swift in Sources */,
+				FB9EC5F1282D32FB008FF216 /* P2PTests.swift in Sources */,
 				FB9E717E282AF635008FBFD0 /* GameViewController.swift in Sources */,
 				FB9F39F0282C29400064F202 /* Constants.swift in Sources */,
 				FB9E7176282AF635008FBFD0 /* AppDelegate.swift in Sources */,
@@ -285,6 +291,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Y7F52ZVSDT;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = tvGame/Info.plist;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -309,6 +316,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Y7F52ZVSDT;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = tvGame/Info.plist;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
 				LD_RUNPATH_SEARCH_PATHS = (

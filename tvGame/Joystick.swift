@@ -93,7 +93,7 @@ final class Joystick: SKNode {
 		guard CACurrentMediaTime() - touchTime > 0.05 else {return}
 		
 		touchLocation = touch.location(in: self)
-		vector = CGVector(dx: xDistance*0.1, dy: yDistance*0.1)
+		vector = CGVector(dx: xDistance*0.3, dy: yDistance*0.3)
 		center = touchLocation
 		movePlayer()
 		self.touchTime = CACurrentMediaTime()

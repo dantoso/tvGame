@@ -1,9 +1,18 @@
 import SpriteKit
+import MultipeerConnectivity
 
 class GameViewController: UIViewController {
 
+	var id: MCPeerID!
+	var mcSession: MCSession!
+	var advertiser: MCAdvertiserAssistant!
+	
     override func viewDidLoad() {
         super.viewDidLoad()
+		
+		id = MCPeerID(displayName: UIDevice.current.name)
+		mcSession = MCSession(peer: id, securityIdentity: nil, encryptionPreference: .required)
+		mcSession.delegate = self
 		
 		view = SKView(frame: view.bounds)
 		let scene = GameScene(size: view.bounds.size)
@@ -22,6 +31,8 @@ class GameViewController: UIViewController {
 			view.showsPhysics = true
 			view.preferredFramesPerSecond = 60
 		}
+		
+		startHosting()
 	}
 
 }
