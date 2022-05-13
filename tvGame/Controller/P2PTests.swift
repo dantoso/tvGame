@@ -15,7 +15,14 @@ extension GameViewController: MCSessionDelegate {
 			print("\(peerID.displayName): Connecting...")
 			
 		case .connected:
-			print("\(peerID.displayName): Connected!")
+			if leftPID == nil {
+				leftPID = peerID
+				print("\(peerID.displayName): Connected to left player!")
+			}
+			else if rightPID == nil {
+				rightPID = peerID
+				print("\(peerID.displayName): Connected to right player!")
+			}
 			
 		@unknown default:
 			print("some weird shit just happend")
@@ -30,8 +37,10 @@ extension GameViewController: MCSessionDelegate {
 		}
 		let vector = NSCoder.cgVector(for: string)
 		
-		DispatchQueue.main.async { [weak self] in
-			self?.scene.player?.physicsBody?.applyImpulse(vector)
+		let player = peerID == leftPID ? scene.leftPlayer : scene.rightPlayer
+		
+		DispatchQueue.main.async {
+			player?.physicsBody?.applyImpulse(vector)
 		}
 	}
 	

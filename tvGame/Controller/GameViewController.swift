@@ -7,6 +7,9 @@ class GameViewController: UIViewController {
 	var mcSession: MCSession!
 	var advertiser: MCAdvertiserAssistant!
 	
+	var leftPID: MCPeerID? = nil
+	var rightPID: MCPeerID? = nil
+	
 	lazy var scene = GameScene(size: view.bounds.size)
 	
     override func viewDidLoad() {

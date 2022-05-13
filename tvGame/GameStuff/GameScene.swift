@@ -3,22 +3,23 @@ import SpriteKit
 class GameScene: SKScene {
 	
 	let screen = UIScreen.main.bounds
-	var player: SKShapeNode?
+	var leftPlayer: SKShapeNode?
+	var rightPlayer: SKShapeNode?
+	var disk: SKShapeNode?
+	
 	lazy var joystick: Joystick = Joystick(rect: frame)
     
     override func sceneDidLoad() {
 		backgroundColor = .lightGray
 		
+		physicsWorld.contactDelegate = self
+		
 		addNodes()
-		joystick.player = player
+		joystick.player = leftPlayer
 		addChild(joystick)
     }
 	
-    override func update(_ currentTime: TimeInterval) {
-        // Called before each frame is rendered
-//		player?.physicsBody?.velocity = joystick.vector
-	}
-	
+	//MARK: - Create and add nodes
 	func createPlayer(radius: CGFloat) -> SKShapeNode {
 		let player = SKShapeNode(circleOfRadius: radius)
 		player.fillColor = .darkGray
@@ -35,7 +36,23 @@ class GameScene: SKScene {
 		return player
 	}
 	
-	//MARK: - Create and add objects
+	func createDisk(radius: CGFloat) -> SKShapeNode {
+		let disk = SKShapeNode(circleOfRadius: radius)
+		disk.fillColor = .systemRed
+		disk.position = CGPoint(x: screen.width/2, y: screen.height/2)
+		
+		let body = SKPhysicsBody(circleOfRadius: radius)
+		body.categoryBitMask = CollisionType.disk
+		body.collisionBitMask = CollisionType.wall + CollisionType.goal + CollisionType.player
+		body.contactTestBitMask = CollisionType.goal
+		body.affectedByGravity = false
+		body.linearDamping = 1
+		body.restitution = 0.1
+		disk.physicsBody = body
+		
+		return disk
+	}
+	
 	func createWall(size: CGSize) -> SKSpriteNode {
 		let node = SKSpriteNode(color: .systemRed, size: size)
 		
@@ -116,8 +133,18 @@ class GameScene: SKScene {
 		addChild(rightGoal)
 		
 		// player
-		player = createPlayer(radius: goalSize.height*0.18)
-		addChild(player!)
+		leftPlayer = createPlayer(radius: goalSize.height*0.18)
+		leftPlayer?.position.x = screen.width*0.25
+		
+		rightPlayer = createPlayer(radius: goalSize.height*0.18)
+		rightPlayer?.position.x = screen.width*0.75
+		
+		addChild(leftPlayer!)
+		addChild(rightPlayer!)
+		
+		//disk
+		disk = createDisk(radius: goalSize.height*0.09)
+		addChild(disk!)
 	}
 	
 }
