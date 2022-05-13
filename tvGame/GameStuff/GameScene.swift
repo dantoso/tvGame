@@ -7,7 +7,7 @@ class GameScene: SKScene {
 	var rightPlayer: SKShapeNode?
 	var disk: SKShapeNode?
 	
-	lazy var joystick: Joystick = Joystick(rect: frame)
+//	lazy var joystick: Joystick = Joystick(rect: frame)
     
     override func sceneDidLoad() {
 		backgroundColor = .lightGray
@@ -15,8 +15,8 @@ class GameScene: SKScene {
 		physicsWorld.contactDelegate = self
 		
 		addNodes()
-		joystick.player = leftPlayer
-		addChild(joystick)
+//		joystick.player = leftPlayer
+//		addChild(joystick)
     }
 	
 	//MARK: - Create and add nodes
@@ -27,7 +27,7 @@ class GameScene: SKScene {
 		
 		let body = SKPhysicsBody(circleOfRadius: radius)
 		body.categoryBitMask = CollisionType.player
-		body.collisionBitMask = CollisionType.wall + CollisionType.goal
+		body.collisionBitMask = CollisionType.wall + CollisionType.goal + CollisionType.player
 		body.affectedByGravity = false
 		body.linearDamping = 1
 		body.restitution = 0.1
@@ -46,8 +46,9 @@ class GameScene: SKScene {
 		body.collisionBitMask = CollisionType.wall + CollisionType.goal + CollisionType.player
 		body.contactTestBitMask = CollisionType.goal
 		body.affectedByGravity = false
-		body.linearDamping = 1
-		body.restitution = 0.1
+		body.linearDamping = 0.2
+		body.restitution = 0.8
+		body.friction = 0.7
 		disk.physicsBody = body
 		
 		return disk
@@ -60,6 +61,7 @@ class GameScene: SKScene {
 		body.isDynamic = false
 		body.categoryBitMask = CollisionType.wall
 		body.restitution = 0.1
+		body.friction = 0.8
 		node.physicsBody = body
 		
 		return node

@@ -6,6 +6,12 @@ extension GameViewController: MCSessionDelegate {
 	func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
 		switch state {
 		case .notConnected:
+			if peerID == leftPID {
+				leftPID = nil
+			}
+			else if peerID == rightPID {
+				rightPID = nil
+			}
 			print("\(peerID.displayName): Disconnected")
 			
 		case .connecting:
@@ -39,7 +45,7 @@ extension GameViewController: MCSessionDelegate {
 		
 		let player = peerID == leftPID ? scene.leftPlayer : scene.rightPlayer
 		
-		DispatchQueue.main.async {
+		 DispatchQueue.main.async {
 			player?.physicsBody?.applyImpulse(vector)
 		}
 	}
