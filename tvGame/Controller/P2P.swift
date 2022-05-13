@@ -23,10 +23,27 @@ extension GameViewController: MCSessionDelegate {
 		case .connected:
 			if leftPID == nil {
 				leftPID = peerID
+				let purple = UIColor.systemPurple
+				do {
+					let data = try NSKeyedArchiver.archivedData(withRootObject: purple, requiringSecureCoding: false) as Data?
+					
+					sendData(data, to: [peerID])
+				}
+				catch {
+					fatalError()
+				}
 				print("\(peerID.displayName): Connected to left player!")
 			}
 			else if rightPID == nil {
 				rightPID = peerID
+				let green = UIColor.systemGreen
+				do {
+					let data = try NSKeyedArchiver.archivedData(withRootObject: green, requiringSecureCoding: false) as Data?
+					sendData(data, to: [peerID])
+				}
+				catch {
+					fatalError()
+				}
 				print("\(peerID.displayName): Connected to right player!")
 			}
 			
@@ -36,17 +53,25 @@ extension GameViewController: MCSessionDelegate {
 	}
 	
 	func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-		
-		guard let string = String(data: data, encoding: .utf8) else {
-			print("failed to convert data to string")
-			return
+		var queue: DispatchQueue
+		if peerID == leftPID {
+			queue = leftQueue
 		}
-		let vector = NSCoder.cgVector(for: string)
-		
-		let player = peerID == leftPID ? scene.leftPlayer : scene.rightPlayer
-		
-		 DispatchQueue.main.async {
-			player?.physicsBody?.applyImpulse(vector)
+		else {
+			queue = rightQueue
+		}
+		queue.async { [weak self] in
+			guard let string = String(data: data, encoding: .utf8) else {
+				print("failed to convert data to string")
+				return
+			}
+			let vector = NSCoder.cgVector(for: string)
+			
+			let player = peerID == self?.leftPID ? self?.scene.leftPlayer : self?.scene.rightPlayer
+			
+			 DispatchQueue.main.async {
+				player?.physicsBody?.applyImpulse(vector)
+			}
 		}
 	}
 	
@@ -56,8 +81,18 @@ extension GameViewController: MCSessionDelegate {
 		print("hosting started")
 	}
 	
-	func sendData() {
-		
+	func sendData(_ data: Data?, to peers: [MCPeerID]) {
+		guard mcSession.connectedPeers.count > 0 else {return}
+		guard let realData = data else {return}
+		do {
+			try mcSession.send(realData, toPeers: peers, with: .reliable)
+			print("data from \(id.displayName) sent")
+		}
+		catch let error as NSError {
+		   let ac = UIAlertController(title: "Send error", message: error.localizedDescription, preferredStyle: .alert)
+		   ac.addAction(UIAlertAction(title: "OK", style: .default))
+		   present(ac, animated: true)
+	   }
 	}
 	
 	func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {

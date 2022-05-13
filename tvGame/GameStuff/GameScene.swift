@@ -3,26 +3,31 @@ import SpriteKit
 class GameScene: SKScene {
 	
 	let screen = UIScreen.main.bounds
-	var leftPlayer: SKShapeNode?
-	var rightPlayer: SKShapeNode?
-	var disk: SKShapeNode?
 	
-//	lazy var joystick: Joystick = Joystick(rect: frame)
-    
+	var leftPlayer: SKShapeNode!
+	var rightPlayer: SKShapeNode!
+	
+	var leftGoal: SKSpriteNode!
+	var rightGoal: SKSpriteNode!
+	
+	lazy var leftLabel = ScoreLabelNode(color: .systemPurple, sideMultiplier: 0.25)
+	lazy var rightLabel = ScoreLabelNode(color: .systemGreen, sideMultiplier: 0.75)
+	
+	var disk: SKShapeNode!
+	    
     override func sceneDidLoad() {
-		backgroundColor = .lightGray
 		
 		physicsWorld.contactDelegate = self
 		
+		addChild(leftLabel)
+		addChild(rightLabel)
 		addNodes()
-//		joystick.player = leftPlayer
-//		addChild(joystick)
     }
 	
 	//MARK: - Create and add nodes
 	func createPlayer(radius: CGFloat) -> SKShapeNode {
 		let player = SKShapeNode(circleOfRadius: radius)
-		player.fillColor = .darkGray
+		player.strokeColor = .black
 		player.position = CGPoint(x: screen.width/2, y: screen.height/2)
 		
 		let body = SKPhysicsBody(circleOfRadius: radius)
@@ -39,6 +44,7 @@ class GameScene: SKScene {
 	func createDisk(radius: CGFloat) -> SKShapeNode {
 		let disk = SKShapeNode(circleOfRadius: radius)
 		disk.fillColor = .systemRed
+		disk.strokeColor = .black
 		disk.position = CGPoint(x: screen.width/2, y: screen.height/2)
 		
 		let body = SKPhysicsBody(circleOfRadius: radius)
@@ -125,21 +131,25 @@ class GameScene: SKScene {
 		//goals
 		let goalSize = CGSize(width: vWallSize.width*0.2, height: screen.height-hWallSize.height*2-vWallSize.height*2)
 		
-		let leftGoal = createGoal(size: goalSize)
+		leftGoal = createGoal(size: goalSize)
 		leftGoal.position = CGPoint(x: goalSize.width/2, y: screen.height/2)
+		leftGoal.name = "left"
 		
-		let rightGoal = createGoal(size: goalSize)
+		rightGoal = createGoal(size: goalSize)
 		rightGoal.position = CGPoint(x: screen.width-goalSize.width/2, y: screen.height/2)
+		rightGoal.name = "right"
 		
-		addChild(leftGoal)
-		addChild(rightGoal)
+		addChild(leftGoal!)
+		addChild(rightGoal!)
 		
 		// player
 		leftPlayer = createPlayer(radius: goalSize.height*0.18)
-		leftPlayer?.position.x = screen.width*0.25
+		leftPlayer.position.x = screen.width*0.25
+		leftPlayer.fillColor = .systemPurple
 		
 		rightPlayer = createPlayer(radius: goalSize.height*0.18)
-		rightPlayer?.position.x = screen.width*0.75
+		rightPlayer.position.x = screen.width*0.75
+		rightPlayer.fillColor = .systemGreen
 		
 		addChild(leftPlayer!)
 		addChild(rightPlayer!)

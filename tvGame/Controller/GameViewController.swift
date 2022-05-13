@@ -7,6 +7,10 @@ class GameViewController: UIViewController {
 	var mcSession: MCSession!
 	var advertiser: MCAdvertiserAssistant!
 	
+	let leftQueue = DispatchQueue(label: "left")
+	let rightQueue = DispatchQueue(label: "right")
+
+	
 	var leftPID: MCPeerID? = nil
 	var rightPID: MCPeerID? = nil
 	
