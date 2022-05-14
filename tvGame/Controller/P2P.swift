@@ -15,8 +15,8 @@ extension GameViewController: MCSessionDelegate {
 			print("\(peerID.displayName): Disconnected")
 			
 		case .connecting:
-			if session.connectedPeers.count == 3 {
-				session.cancelConnectPeer(peerID)
+			if mcSession.connectedPeers.count > 2 {
+				mcSession.cancelConnectPeer(peerID)
 			}
 			print("\(peerID.displayName): Connecting...")
 			
@@ -34,6 +34,7 @@ extension GameViewController: MCSessionDelegate {
 				}
 				print("\(peerID.displayName): Connected to left player!")
 			}
+			
 			else if rightPID == nil {
 				rightPID = peerID
 				let green = UIColor.systemGreen
@@ -45,6 +46,10 @@ extension GameViewController: MCSessionDelegate {
 					fatalError()
 				}
 				print("\(peerID.displayName): Connected to right player!")
+			}
+			
+			if mcSession.connectedPeers.count > 2 {
+				advertiser.stop()
 			}
 			
 		@unknown default:
