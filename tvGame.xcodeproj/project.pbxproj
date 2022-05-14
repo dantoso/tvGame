@@ -16,7 +16,6 @@
 		FB9E7186282AF637008FBFD0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB9E7184282AF637008FBFD0 /* LaunchScreen.storyboard */; };
 		FB9EC5F1282D32FB008FF216 /* P2P.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9EC5F0282D32FB008FF216 /* P2P.swift */; };
 		FB9F39F0282C29400064F202 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9F39EF282C29400064F202 /* Constants.swift */; };
-		FB9F39F2282C3C0F0064F202 /* Joystick.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9F39F1282C3C0F0064F202 /* Joystick.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,7 +30,6 @@
 		FB9EC5F0282D32FB008FF216 /* P2P.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = P2P.swift; sourceTree = "<group>"; };
 		FB9EC5F2282D3B1B008FF216 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		FB9F39EF282C29400064F202 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		FB9F39F1282C3C0F0064F202 /* Joystick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Joystick.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,7 +79,6 @@
 				FB9E717B282AF635008FBFD0 /* GameScene.swift */,
 				FB4643EB282EDE42004470D2 /* ScoreLabelNode.swift */,
 				FB65F31A282DDE3100C75BCB /* ContactHandler.swift */,
-				FB9F39F1282C3C0F0064F202 /* Joystick.swift */,
 			);
 			path = GameStuff;
 			sourceTree = "<group>";
@@ -165,7 +162,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FB9F39F2282C3C0F0064F202 /* Joystick.swift in Sources */,
 				FB4643EC282EDE42004470D2 /* ScoreLabelNode.swift in Sources */,
 				FB9E717C282AF635008FBFD0 /* GameScene.swift in Sources */,
 				FB9EC5F1282D32FB008FF216 /* P2P.swift in Sources */,
