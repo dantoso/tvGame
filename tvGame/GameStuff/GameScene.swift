@@ -90,7 +90,7 @@ class GameScene: SKScene {
 	func addNodes() {
 		
 		// walls
-		let hWallSize = CGSize(width: screen.width, height: screen.height*0.05)
+		let hWallSize = CGSize(width: screen.width, height: screen.height*0.02)
 		let vWallSize = CGSize(width: hWallSize.height, height: screen.height*0.3)
 		
 		let xRight = screen.width - vWallSize.width/2
@@ -139,8 +139,8 @@ class GameScene: SKScene {
 		rightGoal.position = CGPoint(x: screen.width-goalSize.width/2, y: screen.height/2)
 		rightGoal.name = "right"
 		
-		addChild(leftGoal!)
-		addChild(rightGoal!)
+		addChild(leftGoal)
+		addChild(rightGoal)
 		
 		// player
 		leftPlayer = createPlayer(radius: goalSize.height*0.18)
@@ -151,12 +151,12 @@ class GameScene: SKScene {
 		rightPlayer.position.x = screen.width*0.75
 		rightPlayer.fillColor = .systemGreen
 		
-		addChild(leftPlayer!)
-		addChild(rightPlayer!)
+		addChild(leftPlayer)
+		addChild(rightPlayer)
 		
 		//disk
 		disk = createDisk(radius: goalSize.height*0.09)
-		addChild(disk!)
+		addChild(disk)
 	}
 	
 }
