@@ -9,7 +9,6 @@ class GameViewController: UIViewController {
 	
 	let leftQueue = DispatchQueue(label: "left")
 	let rightQueue = DispatchQueue(label: "right")
-
 	
 	var leftPID: MCPeerID? = nil
 	var rightPID: MCPeerID? = nil

@@ -15,36 +15,29 @@ extension GameViewController: MCSessionDelegate {
 			print("\(peerID.displayName): Disconnected")
 			
 		case .connecting:
+			print("\(peerID.displayName): Connecting...")
+			
 			if mcSession.connectedPeers.count > 2 {
+				print("\(peerID.displayName): Cancelling connection...")
 				mcSession.cancelConnectPeer(peerID)
 			}
-			print("\(peerID.displayName): Connecting...")
 			
 		case .connected:
 			if leftPID == nil {
 				leftPID = peerID
+				
 				let purple = UIColor.systemPurple
-				do {
-					let data = try NSKeyedArchiver.archivedData(withRootObject: purple, requiringSecureCoding: false) as Data?
-					
-					sendData(data, to: [peerID])
-				}
-				catch {
-					fatalError()
-				}
+				sendData(encodeColor(purple), to: [peerID])
+				
 				print("\(peerID.displayName): Connected to left player!")
 			}
 			
 			else if rightPID == nil {
 				rightPID = peerID
+				
 				let green = UIColor.systemGreen
-				do {
-					let data = try NSKeyedArchiver.archivedData(withRootObject: green, requiringSecureCoding: false) as Data?
-					sendData(data, to: [peerID])
-				}
-				catch {
-					fatalError()
-				}
+				sendData(encodeColor(green), to: [peerID])
+				
 				print("\(peerID.displayName): Connected to right player!")
 			}
 			
@@ -58,24 +51,28 @@ extension GameViewController: MCSessionDelegate {
 	}
 	
 	func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
+		
 		var queue: DispatchQueue
+		var player: SKShapeNode
+		
 		if peerID == leftPID {
 			queue = leftQueue
+			player = scene.leftPlayer
 		}
 		else {
 			queue = rightQueue
+			player = scene.rightPlayer
 		}
-		queue.async { [weak self] in
+		
+		queue.async {
 			guard let string = String(data: data, encoding: .utf8) else {
 				print("failed to convert data to string")
 				return
 			}
 			let vector = NSCoder.cgVector(for: string)
-			
-			let player = peerID == self?.leftPID ? self?.scene.leftPlayer : self?.scene.rightPlayer
-			
+						
 			 DispatchQueue.main.async {
-				player?.physicsBody?.applyImpulse(vector)
+				player.physicsBody?.applyImpulse(vector)
 			}
 		}
 	}
@@ -86,9 +83,16 @@ extension GameViewController: MCSessionDelegate {
 		print("hosting started")
 	}
 	
+	func encodeColor(_ color: UIColor) -> Data? {
+		let data = try? NSKeyedArchiver.archivedData(withRootObject: color, requiringSecureCoding: false) as Data?
+		return data
+	}
+	
 	func sendData(_ data: Data?, to peers: [MCPeerID]) {
+		
 		guard mcSession.connectedPeers.count > 0 else {return}
 		guard let realData = data else {return}
+		
 		do {
 			try mcSession.send(realData, toPeers: peers, with: .reliable)
 			print("data from \(id.displayName) sent")
@@ -98,6 +102,7 @@ extension GameViewController: MCSessionDelegate {
 		   ac.addAction(UIAlertAction(title: "OK", style: .default))
 		   present(ac, animated: true)
 	   }
+		
 	}
 	
 	func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
