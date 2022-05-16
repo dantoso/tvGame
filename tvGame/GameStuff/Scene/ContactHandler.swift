@@ -22,12 +22,12 @@ extension GameScene: SKPhysicsContactDelegate {
 		nodeA.contactBegin(with: nodeB)
 		nodeB.contactBegin(with: nodeA)
 		
-		if nodeA.name == "left" || nodeB.name == "left" {
-			updateScore(label: rightLabel)
-		}
-		else {
-			updateScore(label: leftLabel)
-		}
+//		if nodeA.name == "left" || nodeB.name == "left" {
+//			updateScore(label: rightLabel)
+//		}
+//		else {
+//			updateScore(label: leftLabel)
+//		}
 	}
 	
 	func updateScore(label: ScoreLabel) {
