@@ -7,11 +7,14 @@ class GameScene: SKScene {
 	var leftPlayer: SKShapeNode!
 	var rightPlayer: SKShapeNode!
 	
-	var leftGoal: SKSpriteNode!
-	var rightGoal: SKSpriteNode!
+//	var player1: Player?
+//	var player2: Player?
 	
-	lazy var leftLabel = ScoreLabelNode(color: .systemPurple, sideMultiplier: 0.25)
-	lazy var rightLabel = ScoreLabelNode(color: .systemGreen, sideMultiplier: 0.75)
+	var leftGoal: Goal!
+	var rightGoal: Goal!
+	
+	lazy var leftLabel = ScoreLabel(color: .systemPurple, sideMultiplier: 0.25)
+	lazy var rightLabel = ScoreLabel(color: .systemGreen, sideMultiplier: 0.75)
 	
 	var disk: SKShapeNode!
 	    
@@ -73,20 +76,6 @@ class GameScene: SKScene {
 		return node
 	}
 	
-	func createGoal(size: CGSize) -> SKSpriteNode {
-		let node = SKSpriteNode(color: .clear, size: size)
-		
-		let body = SKPhysicsBody(rectangleOf: size)
-		body.isDynamic = false
-		body.categoryBitMask = CollisionType.goal
-		body.contactTestBitMask = CollisionType.disk
-		body.restitution = 0
-		body.friction = 1
-		node.physicsBody = body
-		
-		return node
-	}
-	
 	func addNodes() {
 		
 		// walls
@@ -131,13 +120,11 @@ class GameScene: SKScene {
 		//goals
 		let goalSize = CGSize(width: vWallSize.width*0.2, height: screen.height-hWallSize.height*2-vWallSize.height*2)
 		
-		leftGoal = createGoal(size: goalSize)
+		leftGoal = Goal(size: goalSize, label: rightLabel)
 		leftGoal.position = CGPoint(x: goalSize.width/2, y: screen.height/2)
-		leftGoal.name = "left"
 		
-		rightGoal = createGoal(size: goalSize)
+		rightGoal = Goal(size: goalSize, label: leftLabel)
 		rightGoal.position = CGPoint(x: screen.width-goalSize.width/2, y: screen.height/2)
-		rightGoal.name = "right"
 		
 		addChild(leftGoal)
 		addChild(rightGoal)

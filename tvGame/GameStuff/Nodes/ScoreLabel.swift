@@ -1,12 +1,16 @@
 import SpriteKit
 
 
-final class ScoreLabelNode: SKNode {
+final class ScoreLabel: SKNode {
 	
 	let screen = UIScreen.main.bounds
 	
-	private var score: Int
 	private var label: SKLabelNode
+	private var score: Int {
+		didSet {
+			label.text = "\(score)"
+		}
+	}
 	
 	init(color: UIColor, sideMultiplier: CGFloat, score: Int = 0) {
 		self.score = score
@@ -25,10 +29,12 @@ final class ScoreLabelNode: SKNode {
 		fatalError("init(coder:) has not been implemented")
 	}
 	
-	func updateLabel() {
+	func updateScore() {
 		score += 1
-		label.text = "\(score)"
 	}
 	
+	func reset() {
+		score = 0
+	}
 	
 }

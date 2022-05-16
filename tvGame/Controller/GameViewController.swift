@@ -3,23 +3,21 @@ import MultipeerConnectivity
 
 class GameViewController: UIViewController {
 
-	var id: MCPeerID!
-	var mcSession: MCSession!
-	var advertiser: MCAdvertiserAssistant!
-	
-	let leftQueue = DispatchQueue(label: "left")
-	let rightQueue = DispatchQueue(label: "right")
+	lazy var id = MCPeerID(displayName: UIDevice.current.name)
+	lazy var mcSession = MCSession(peer: id, securityIdentity: nil, encryptionPreference: .required)
+	lazy var advertiser = MCAdvertiserAssistant(serviceType: "mdv-hm", discoveryInfo: nil, session: mcSession)
 	
 	var leftPID: MCPeerID? = nil
 	var rightPID: MCPeerID? = nil
 	
 	lazy var scene = GameScene(size: view.bounds.size)
 	
+	let leftQueue = DispatchQueue(label: "left")
+	let rightQueue = DispatchQueue(label: "right")
+	
     override func viewDidLoad() {
         super.viewDidLoad()
 		
-		id = MCPeerID(displayName: UIDevice.current.name)
-		mcSession = MCSession(peer: id, securityIdentity: nil, encryptionPreference: .required)
 		mcSession.delegate = self
 		
 		view = SKView(frame: view.bounds)

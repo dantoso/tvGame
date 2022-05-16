@@ -7,8 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		FB4643EC282EDE42004470D2 /* ScoreLabelNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4643EB282EDE42004470D2 /* ScoreLabelNode.swift */; };
+		FB4643EC282EDE42004470D2 /* ScoreLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4643EB282EDE42004470D2 /* ScoreLabel.swift */; };
 		FB65F31B282DDE3100C75BCB /* ContactHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB65F31A282DDE3100C75BCB /* ContactHandler.swift */; };
+		FB7F84182831902E00A4CDBF /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7F84172831902E00A4CDBF /* Player.swift */; };
+		FB7F841C2831C39D00A4CDBF /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7F841B2831C39D00A4CDBF /* Goal.swift */; };
 		FB9E7176282AF635008FBFD0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9E7175282AF635008FBFD0 /* AppDelegate.swift */; };
 		FB9E717C282AF635008FBFD0 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9E717B282AF635008FBFD0 /* GameScene.swift */; };
 		FB9E717E282AF635008FBFD0 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9E717D282AF635008FBFD0 /* GameViewController.swift */; };
@@ -19,8 +21,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		FB4643EB282EDE42004470D2 /* ScoreLabelNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreLabelNode.swift; sourceTree = "<group>"; };
+		FB4643EB282EDE42004470D2 /* ScoreLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreLabel.swift; sourceTree = "<group>"; };
 		FB65F31A282DDE3100C75BCB /* ContactHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactHandler.swift; sourceTree = "<group>"; };
+		FB7F84172831902E00A4CDBF /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		FB7F841B2831C39D00A4CDBF /* Goal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Goal.swift; sourceTree = "<group>"; };
 		FB9E7172282AF635008FBFD0 /* tvGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tvGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB9E7175282AF635008FBFD0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FB9E717B282AF635008FBFD0 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
@@ -43,6 +47,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FB7F841D2831C3A100A4CDBF /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				FB9E717B282AF635008FBFD0 /* GameScene.swift */,
+				FB65F31A282DDE3100C75BCB /* ContactHandler.swift */,
+			);
+			path = Scene;
+			sourceTree = "<group>";
+		};
+		FB7F841E2831C3B000A4CDBF /* Nodes */ = {
+			isa = PBXGroup;
+			children = (
+				FB7F84172831902E00A4CDBF /* Player.swift */,
+				FB7F841B2831C39D00A4CDBF /* Goal.swift */,
+				FB4643EB282EDE42004470D2 /* ScoreLabel.swift */,
+			);
+			path = Nodes;
+			sourceTree = "<group>";
+		};
 		FB9E7169282AF635008FBFD0 = {
 			isa = PBXGroup;
 			children = (
@@ -76,9 +99,8 @@
 		FBF82B95282D8A8300F7FA05 /* GameStuff */ = {
 			isa = PBXGroup;
 			children = (
-				FB9E717B282AF635008FBFD0 /* GameScene.swift */,
-				FB4643EB282EDE42004470D2 /* ScoreLabelNode.swift */,
-				FB65F31A282DDE3100C75BCB /* ContactHandler.swift */,
+				FB7F841E2831C3B000A4CDBF /* Nodes */,
+				FB7F841D2831C3A100A4CDBF /* Scene */,
 			);
 			path = GameStuff;
 			sourceTree = "<group>";
@@ -162,12 +184,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FB4643EC282EDE42004470D2 /* ScoreLabelNode.swift in Sources */,
+				FB4643EC282EDE42004470D2 /* ScoreLabel.swift in Sources */,
 				FB9E717C282AF635008FBFD0 /* GameScene.swift in Sources */,
 				FB9EC5F1282D32FB008FF216 /* P2P.swift in Sources */,
 				FB65F31B282DDE3100C75BCB /* ContactHandler.swift in Sources */,
+				FB7F84182831902E00A4CDBF /* Player.swift in Sources */,
 				FB9E717E282AF635008FBFD0 /* GameViewController.swift in Sources */,
 				FB9F39F0282C29400064F202 /* Constants.swift in Sources */,
+				FB7F841C2831C39D00A4CDBF /* Goal.swift in Sources */,
 				FB9E7176282AF635008FBFD0 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

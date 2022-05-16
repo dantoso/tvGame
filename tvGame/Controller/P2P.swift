@@ -6,11 +6,13 @@ extension GameViewController: MCSessionDelegate {
 	func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
 		switch state {
 		case .notConnected:
-			if peerID == leftPID {
-				leftPID = nil
+			if scene.player1?.id == peerID {
+				scene.player1!.id = nil
+				scene.removeChildren(in: [scene.player1!])
 			}
-			else if peerID == rightPID {
-				rightPID = nil
+			else if scene.player2?.id == peerID {
+				scene.player2!.id = nil
+				scene.removeChildren(in: [scene.player2!])
 			}
 			print("\(peerID.displayName): Disconnected")
 			
@@ -26,8 +28,8 @@ extension GameViewController: MCSessionDelegate {
 			if leftPID == nil {
 				leftPID = peerID
 				
-				let purple = UIColor.systemPurple
-				sendData(encodeColor(purple), to: [peerID])
+				let data = encodeColor(.systemPurple)
+				sendData(data, to: [peerID])
 				
 				print("\(peerID.displayName): Connected to left player!")
 			}
@@ -35,8 +37,8 @@ extension GameViewController: MCSessionDelegate {
 			else if rightPID == nil {
 				rightPID = peerID
 				
-				let green = UIColor.systemGreen
-				sendData(encodeColor(green), to: [peerID])
+				let data = encodeColor(.systemGreen)
+				sendData(data, to: [peerID])
 				
 				print("\(peerID.displayName): Connected to right player!")
 			}
@@ -78,7 +80,6 @@ extension GameViewController: MCSessionDelegate {
 	}
 	
 	func startHosting() {
-		advertiser = MCAdvertiserAssistant(serviceType: "mdv-hm", discoveryInfo: nil, session: mcSession)
 		advertiser.start()
 		print("hosting started")
 	}
