@@ -33,7 +33,7 @@ extension GameScene: SKPhysicsContactDelegate {
 	func updateScore(label: ScoreLabel) {
 		label.updateScore()
 		removeChildren(in: [disk])
-		disk.position = CGPoint(x: screen.width/2, y: screen.height/2)
+		disk.position = CGPoint(x: Sizes.screen.width/2, y: Sizes.screen.height/2)
 		addChild(disk)
 	}
 	
