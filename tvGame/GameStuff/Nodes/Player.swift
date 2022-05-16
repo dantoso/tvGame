@@ -3,16 +3,22 @@ import MultipeerConnectivity
 
 final class Player: SKNode {
 	
-	var id: MCPeerID?
+	var id: MCPeerID? {
+		didSet {
+			guard let id = id else {
+				queue = nil
+				return
+			}
+			queue = DispatchQueue(label: id.displayName)
+		}
+	}
 	private var queue: DispatchQueue?
 	private let node: SKShapeNode
 	
 	init(radius: CGFloat, color: UIColor, id: MCPeerID? = nil) {
 		self.node = SKShapeNode(circleOfRadius: radius)
+		node.fillColor = color
 		self.id = id
-		if let id = id {
-			self.queue = DispatchQueue(label: id.displayName)
-		}
 		super.init()
 		
 		addPhysics()
@@ -30,6 +36,7 @@ final class Player: SKNode {
 		body.affectedByGravity = false
 		body.linearDamping = 1
 		body.restitution = 0.1
+		body.mass *= 0.5
 		
 		node.physicsBody = body
 	}
@@ -42,7 +49,9 @@ final class Player: SKNode {
 			}
 			
 			let vector = NSCoder.cgVector(for: string)
-			self?.node.physicsBody?.applyImpulse(vector)
+			DispatchQueue.main.async {
+				self?.node.physicsBody?.applyImpulse(vector)
+			}
 		}
 		
 	}

@@ -1,6 +1,6 @@
 import SpriteKit
 
-final class Goal: SKNode {
+final class Goal: SKNode, Contactable {
 	
 	weak var label: ScoreLabel?
 	var node: SKSpriteNode
@@ -26,11 +26,14 @@ final class Goal: SKNode {
 		body.restitution = 0
 		body.friction = 1
 		
-		node.physicsBody = body
+		self.physicsBody = body
 	}
 	
 	func contactBegin(with node: SKNode) {
+		print("begin")
 		label?.updateScore()
 	}
+	
+	func contactEnd(with node: SKNode) {}
 	
 }

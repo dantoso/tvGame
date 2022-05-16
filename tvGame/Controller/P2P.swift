@@ -8,11 +8,9 @@ extension GameViewController: MCSessionDelegate {
 		case .notConnected:
 			if scene.player1.id == peerID {
 				scene.player1.id = nil
-				scene.removeChildren(in: [scene.player1])
 			}
 			else if scene.player2.id == peerID {
 				scene.player2.id = nil
-				scene.removeChildren(in: [scene.player2])
 			}
 			print("\(peerID.displayName): Disconnected")
 			
@@ -21,7 +19,7 @@ extension GameViewController: MCSessionDelegate {
 			
 		case .connected:
 			if scene.player1.id == nil {
-				scene.addPlayer(scene.player1, with: peerID)
+				scene.player1.id = peerID
 				
 				let data = encodeColor(.systemPurple)
 				sendData(data, to: [peerID])
@@ -30,8 +28,8 @@ extension GameViewController: MCSessionDelegate {
 			}
 			
 			else if scene.player2.id == nil {
-				scene.addPlayer(scene.player2, with: peerID)
-				
+				scene.player2.id = peerID
+
 				let data = encodeColor(.systemGreen)
 				sendData(data, to: [peerID])
 				

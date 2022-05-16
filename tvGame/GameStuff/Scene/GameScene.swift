@@ -53,6 +53,9 @@ class GameScene: SKScene {
 		//disk
 		addChild(disk)
 		
+		addChild(player1)
+		addChild(player2)
+		
 		addWalls()
     }
 	
@@ -121,11 +124,6 @@ class GameScene: SKScene {
 		// direita
 		addChild(topRightWall)
 		addChild(botRightWall)
-	}
-	
-	func addPlayer(_ player: Player, with id: MCPeerID) {
-		player.id = id
-		addChild(player)
 	}
 	
 }

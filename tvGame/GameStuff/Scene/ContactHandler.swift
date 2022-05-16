@@ -5,23 +5,20 @@ protocol Contactable {
 	func contactEnd(with node: SKNode)
 }
 
-extension Contactable {
-	func contactBegin(with node: SKNode) {}
-	func contactEnd(with node: SKNode) {}
-}
-
-extension SKNode: Contactable {}
-
-
 extension GameScene: SKPhysicsContactDelegate {
 	
 	func didBegin(_ contact: SKPhysicsContact) {
 		guard let nodeA = contact.bodyA.node,
 			  let nodeB = contact.bodyB.node else {return}
+				
+		if let node = nodeA as? Contactable {
+			node.contactBegin(with: nodeB)
+		}
+		else {
+			(nodeB as! Contactable).contactBegin(with: nodeA)
+		}
 		
-		nodeA.contactBegin(with: nodeB)
-		nodeB.contactBegin(with: nodeA)
-		
+		resetDisk()
 //		if nodeA.name == "left" || nodeB.name == "left" {
 //			updateScore(label: rightLabel)
 //		}
@@ -30,8 +27,7 @@ extension GameScene: SKPhysicsContactDelegate {
 //		}
 	}
 	
-	func updateScore(label: ScoreLabel) {
-		label.updateScore()
+	func resetDisk() {
 		removeChildren(in: [disk])
 		disk.position = CGPoint(x: Sizes.screen.width/2, y: Sizes.screen.height/2)
 		addChild(disk)
