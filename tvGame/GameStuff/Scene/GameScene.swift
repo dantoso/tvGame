@@ -1,54 +1,67 @@
 import SpriteKit
+import MultipeerConnectivity
 
 class GameScene: SKScene {
+		
+	lazy var player1: Player = {
+		let player = Player(radius: Sizes.playerRadius, color: .systemPurple)
+		player.position = CGPoint(x: Sizes.screen.width*0.25, y: Sizes.screen.height/2)
+		
+		return player
+	}()
 	
-	let screen = UIScreen.main.bounds
+	lazy var player2: Player = {
+		let player = Player(radius: Sizes.playerRadius, color: .systemGreen)
+		player.position = CGPoint(x: Sizes.screen.width*0.75, y: Sizes.screen.height/2)
+		
+		return player
+	}()
 	
-	var leftPlayer: SKShapeNode!
-	var rightPlayer: SKShapeNode!
+	lazy var leftGoal: Goal = {
+		let goal = Goal(size: Sizes.goal, label: rightLabel)
+		goal.position = Positions.leftGoal
+		
+		return goal
+	}()
 	
-//	var player1: Player?
-//	var player2: Player?
-	
-	var leftGoal: Goal!
-	var rightGoal: Goal!
+	lazy var rightGoal: Goal = {
+		let goal = Goal(size: Sizes.goal, label: leftLabel)
+		goal.position = Positions.rightGoal
+		
+		return goal
+	}()
 	
 	lazy var leftLabel = ScoreLabel(color: .systemPurple, sideMultiplier: 0.25)
 	lazy var rightLabel = ScoreLabel(color: .systemGreen, sideMultiplier: 0.75)
 	
-	var disk: SKShapeNode!
+	lazy var disk: SKShapeNode = {
+		createDisk(radius: Sizes.diskRadius)
+	}()
 	    
     override func sceneDidLoad() {
 		
 		physicsWorld.contactDelegate = self
 		
+		// labels
 		addChild(leftLabel)
 		addChild(rightLabel)
-		addNodes()
+		
+		//goals
+		addChild(leftGoal)
+		addChild(rightGoal)
+		
+		//disk
+		addChild(disk)
+		
+		addWalls()
     }
 	
 	//MARK: - Create and add nodes
-	func createPlayer(radius: CGFloat) -> SKShapeNode {
-		let player = SKShapeNode(circleOfRadius: radius)
-		player.strokeColor = .black
-		player.position = CGPoint(x: screen.width/2, y: screen.height/2)
-		
-		let body = SKPhysicsBody(circleOfRadius: radius)
-		body.categoryBitMask = CollisionType.player
-		body.collisionBitMask = CollisionType.wall + CollisionType.goal + CollisionType.player
-		body.affectedByGravity = false
-		body.linearDamping = 1
-		body.restitution = 0.1
-		player.physicsBody = body
-		
-		return player
-	}
-	
 	func createDisk(radius: CGFloat) -> SKShapeNode {
 		let disk = SKShapeNode(circleOfRadius: radius)
 		disk.fillColor = .systemRed
 		disk.strokeColor = .black
-		disk.position = CGPoint(x: screen.width/2, y: screen.height/2)
+		disk.position = CGPoint(x: Sizes.screen.width/2, y: Sizes.screen.height/2)
 		
 		let body = SKPhysicsBody(circleOfRadius: radius)
 		body.categoryBitMask = CollisionType.disk
@@ -76,74 +89,43 @@ class GameScene: SKScene {
 		return node
 	}
 	
-	func addNodes() {
+	func addWalls() {
 		
 		// walls
-		let hWallSize = CGSize(width: screen.width, height: screen.height*0.02)
-		let vWallSize = CGSize(width: hWallSize.height, height: screen.height*0.3)
+		let bottomWall = createWall(size: Sizes.hWall)
+		bottomWall.position = Positions.topWall
 		
-		let xRight = screen.width - vWallSize.width/2
-		let xLeft = vWallSize.width/2
-		let yUp = screen.height - hWallSize.height - vWallSize.height/2
-		let yBot = hWallSize.height + vWallSize.height/2
-				
-		let bottomWall = createWall(size: hWallSize)
-		bottomWall.position = CGPoint(x: screen.width/2, y: hWallSize.height/2)
+		let topWall = createWall(size: Sizes.hWall)
+		topWall.position = Positions.botWall
 		
-		let topWall = createWall(size: hWallSize)
-		topWall.position = CGPoint(x: screen.width/2, y: screen.height-hWallSize.height/2)
+		let topLeftWall = createWall(size: Sizes.vWall)
+		topLeftWall.position = Positions.topLeftWall
 		
-		let upLeftWall = createWall(size: vWallSize)
-		upLeftWall.position = CGPoint(x: xLeft, y: yUp)
+		let botLeftWall = createWall(size: Sizes.vWall)
+		botLeftWall.position = Positions.botLeftWall
 		
-		let botLeftWall = createWall(size: vWallSize)
-		botLeftWall.position = CGPoint(x: xLeft, y: yBot)
+		let topRightWall = createWall(size: Sizes.vWall)
+		topRightWall.position = Positions.topRightWall
 		
-		let upRightWall = createWall(size: vWallSize)
-		upRightWall.position = CGPoint(x: xRight, y: yUp)
-		
-		let botRightWall = createWall(size: vWallSize)
-		botRightWall.position = CGPoint(x: xRight, y: yBot)
+		let botRightWall = createWall(size: Sizes.vWall)
+		botRightWall.position = Positions.botRightWall
 		
 		// cima baixo
 		addChild(topWall)
 		addChild(bottomWall)
 		
 		// esquerda
-		addChild(upLeftWall)
+		addChild(topLeftWall)
 		addChild(botLeftWall)
 		
 		// direita
-		addChild(upRightWall)
+		addChild(topRightWall)
 		addChild(botRightWall)
-		
-		//goals
-		let goalSize = CGSize(width: vWallSize.width*0.2, height: screen.height-hWallSize.height*2-vWallSize.height*2)
-		
-		leftGoal = Goal(size: goalSize, label: rightLabel)
-		leftGoal.position = CGPoint(x: goalSize.width/2, y: screen.height/2)
-		
-		rightGoal = Goal(size: goalSize, label: leftLabel)
-		rightGoal.position = CGPoint(x: screen.width-goalSize.width/2, y: screen.height/2)
-		
-		addChild(leftGoal)
-		addChild(rightGoal)
-		
-		// player
-		leftPlayer = createPlayer(radius: goalSize.height*0.18)
-		leftPlayer.position.x = screen.width*0.25
-		leftPlayer.fillColor = .systemPurple
-		
-		rightPlayer = createPlayer(radius: goalSize.height*0.18)
-		rightPlayer.position.x = screen.width*0.75
-		rightPlayer.fillColor = .systemGreen
-		
-		addChild(leftPlayer)
-		addChild(rightPlayer)
-		
-		//disk
-		disk = createDisk(radius: goalSize.height*0.09)
-		addChild(disk)
+	}
+	
+	func addPlayer(_ player: Player, with id: MCPeerID) {
+		player.id = id
+		addChild(player)
 	}
 	
 }

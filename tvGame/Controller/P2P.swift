@@ -6,27 +6,22 @@ extension GameViewController: MCSessionDelegate {
 	func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
 		switch state {
 		case .notConnected:
-			if scene.player1?.id == peerID {
-				scene.player1!.id = nil
-				scene.removeChildren(in: [scene.player1!])
+			if scene.player1.id == peerID {
+				scene.player1.id = nil
+				scene.removeChildren(in: [scene.player1])
 			}
-			else if scene.player2?.id == peerID {
-				scene.player2!.id = nil
-				scene.removeChildren(in: [scene.player2!])
+			else if scene.player2.id == peerID {
+				scene.player2.id = nil
+				scene.removeChildren(in: [scene.player2])
 			}
 			print("\(peerID.displayName): Disconnected")
 			
 		case .connecting:
 			print("\(peerID.displayName): Connecting...")
 			
-			if mcSession.connectedPeers.count > 2 {
-				print("\(peerID.displayName): Cancelling connection...")
-				mcSession.cancelConnectPeer(peerID)
-			}
-			
 		case .connected:
-			if leftPID == nil {
-				leftPID = peerID
+			if scene.player1.id == nil {
+				scene.addPlayer(scene.player1, with: peerID)
 				
 				let data = encodeColor(.systemPurple)
 				sendData(data, to: [peerID])
@@ -34,8 +29,8 @@ extension GameViewController: MCSessionDelegate {
 				print("\(peerID.displayName): Connected to left player!")
 			}
 			
-			else if rightPID == nil {
-				rightPID = peerID
+			else if scene.player2.id == nil {
+				scene.addPlayer(scene.player2, with: peerID)
 				
 				let data = encodeColor(.systemGreen)
 				sendData(data, to: [peerID])
@@ -53,29 +48,11 @@ extension GameViewController: MCSessionDelegate {
 	}
 	
 	func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-		
-		var queue: DispatchQueue
-		var player: SKShapeNode
-		
-		if peerID == leftPID {
-			queue = leftQueue
-			player = scene.leftPlayer
+		if scene.player1.id == peerID {
+			scene.player1.processData(data)
 		}
-		else {
-			queue = rightQueue
-			player = scene.rightPlayer
-		}
-		
-		queue.async {
-			guard let string = String(data: data, encoding: .utf8) else {
-				print("failed to convert data to string")
-				return
-			}
-			let vector = NSCoder.cgVector(for: string)
-						
-			 DispatchQueue.main.async {
-				player.physicsBody?.applyImpulse(vector)
-			}
+		else if scene.player2.id == peerID {
+			scene.player2.processData(data)
 		}
 	}
 	

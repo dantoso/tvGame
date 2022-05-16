@@ -7,7 +7,7 @@ final class Player: SKNode {
 	private var queue: DispatchQueue?
 	private let node: SKShapeNode
 	
-	init(radius: CGFloat, id: MCPeerID? = nil) {
+	init(radius: CGFloat, color: UIColor, id: MCPeerID? = nil) {
 		self.node = SKShapeNode(circleOfRadius: radius)
 		self.id = id
 		if let id = id {

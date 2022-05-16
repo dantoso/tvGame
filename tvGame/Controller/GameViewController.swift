@@ -7,13 +7,7 @@ class GameViewController: UIViewController {
 	lazy var mcSession = MCSession(peer: id, securityIdentity: nil, encryptionPreference: .required)
 	lazy var advertiser = MCAdvertiserAssistant(serviceType: "mdv-hm", discoveryInfo: nil, session: mcSession)
 	
-	var leftPID: MCPeerID? = nil
-	var rightPID: MCPeerID? = nil
-	
 	lazy var scene = GameScene(size: view.bounds.size)
-	
-	let leftQueue = DispatchQueue(label: "left")
-	let rightQueue = DispatchQueue(label: "right")
 	
     override func viewDidLoad() {
         super.viewDidLoad()
