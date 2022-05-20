@@ -36,7 +36,7 @@ final class Player: SKNode {
 		body.affectedByGravity = false
 		body.linearDamping = 1
 		body.restitution = 0.1
-		body.mass *= 0.5
+		body.mass *= 0.6
 		
 		node.physicsBody = body
 	}

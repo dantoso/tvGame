@@ -86,7 +86,6 @@ class GameScene: SKScene {
 		body.isDynamic = false
 		body.categoryBitMask = CollisionType.wall
 		body.restitution = 0.1
-		body.friction = 0.8
 		node.physicsBody = body
 		
 		return node
