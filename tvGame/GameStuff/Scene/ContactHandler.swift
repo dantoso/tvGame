@@ -19,12 +19,6 @@ extension GameScene: SKPhysicsContactDelegate {
 		}
 		
 		resetDisk()
-//		if nodeA.name == "left" || nodeB.name == "left" {
-//			updateScore(label: rightLabel)
-//		}
-//		else {
-//			updateScore(label: leftLabel)
-//		}
 	}
 	
 	func resetDisk() {
