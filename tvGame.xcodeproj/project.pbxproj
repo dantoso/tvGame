@@ -18,6 +18,7 @@
 		FB9E7186282AF637008FBFD0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB9E7184282AF637008FBFD0 /* LaunchScreen.storyboard */; };
 		FB9EC5F1282D32FB008FF216 /* P2P.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9EC5F0282D32FB008FF216 /* P2P.swift */; };
 		FB9F39F0282C29400064F202 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9F39EF282C29400064F202 /* Constants.swift */; };
+		FBE0484B2838147100B0F3C4 /* SwiftP2PConnector in Frameworks */ = {isa = PBXBuildFile; productRef = FBE0484A2838147100B0F3C4 /* SwiftP2PConnector */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FBE0484B2838147100B0F3C4 /* SwiftP2PConnector in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -130,6 +132,9 @@
 			dependencies = (
 			);
 			name = tvGame;
+			packageProductDependencies = (
+				FBE0484A2838147100B0F3C4 /* SwiftP2PConnector */,
+			);
 			productName = tvGame;
 			productReference = FB9E7172282AF635008FBFD0 /* tvGame.app */;
 			productType = "com.apple.product-type.application";
@@ -158,6 +163,9 @@
 				Base,
 			);
 			mainGroup = FB9E7169282AF635008FBFD0;
+			packageReferences = (
+				FBE048492838147100B0F3C4 /* XCRemoteSwiftPackageReference "SwiftP2PConnector" */,
+			);
 			productRefGroup = FB9E7173282AF635008FBFD0 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -398,6 +406,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		FBE048492838147100B0F3C4 /* XCRemoteSwiftPackageReference "SwiftP2PConnector" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dantoso/SwiftP2PConnector.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		FBE0484A2838147100B0F3C4 /* SwiftP2PConnector */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FBE048492838147100B0F3C4 /* XCRemoteSwiftPackageReference "SwiftP2PConnector" */;
+			productName = SwiftP2PConnector;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = FB9E716A282AF635008FBFD0 /* Project object */;
 }
