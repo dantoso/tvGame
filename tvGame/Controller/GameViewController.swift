@@ -11,7 +11,9 @@ final class GameViewController: UIViewController, ReceiveDelegate {
         super.viewDidLoad()
 				
 		view = SKView(frame: view.bounds)
-		
+		P2PConnector.receiveDelegate = self
+		P2PConnector.connectionDelegate = self
+
 		// Set the scale mode to scale to fit the window
 		scene.scaleMode = .aspectFill
 		
