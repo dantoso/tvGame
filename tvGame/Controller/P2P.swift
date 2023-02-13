@@ -9,7 +9,7 @@ enum CommandKeys: String {
 
 extension GameViewController: ConnectionDelegate {
 	
-	func didDisconnect(with peerID: MCPeerID) {
+	func didDisconnect(to peerID: MCPeerID) {
 		if scene.player1.id == peerID {
 			scene.player1.id = nil
 		}
@@ -19,11 +19,11 @@ extension GameViewController: ConnectionDelegate {
 		print("\(peerID.displayName): Disconnected")
 	}
 	
-	func isConnecting(with peerID: MCPeerID) {
+	func isConnecting(to peerID: MCPeerID) {
 		print("\(peerID.displayName): Connecting...")
 	}
 	
-	func didConnect(with peerID: MCPeerID) {
+	func didConnect(to peerID: MCPeerID) {
 		if scene.player1.id == nil {
 			scene.player1.id = peerID
 			P2PConnector.sendKey(CommandKeys.changeColorToGreen.rawValue, to: [peerID])
