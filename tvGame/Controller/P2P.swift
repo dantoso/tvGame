@@ -26,13 +26,13 @@ extension GameViewController: ConnectionDelegate {
 	func didConnect(to peerID: MCPeerID) {
 		if scene.player1.id == nil {
 			scene.player1.id = peerID
-			P2PConnector.sendKey(CommandKeys.changeColorToGreen.rawValue, to: [peerID])
+			P2PConnector.sendKey(CommandKeys.changeColorToPurple.rawValue, to: [peerID])
 			print("\(peerID.displayName): Connected to left player!")
 		}
 		
 		else if scene.player2.id == nil {
 			scene.player2.id = peerID
-			P2PConnector.sendKey(CommandKeys.changeColorToPurple.rawValue, to: [peerID])
+			P2PConnector.sendKey(CommandKeys.changeColorToGreen.rawValue, to: [peerID])
 			print("\(peerID.displayName): Connected to right player!")
 		}
 		
