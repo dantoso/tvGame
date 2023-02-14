@@ -43,4 +43,9 @@ final class GameViewController: UIViewController, ReceiveDelegate {
 			scene.player2.processData(data)
 		}
 	}
+
+	func didReceivePing(_ ping: Double, from peerID: MCPeerID) {
+		let ms = ping*1000
+		print("\(peerID.displayName): \(ms) ms")
+	}
 }
